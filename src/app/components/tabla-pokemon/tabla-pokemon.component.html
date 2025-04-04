@@ -11,6 +11,7 @@
 		[rows]="5"
 		[tableStyle]="{ 'min-width': '50rem' }"
 		[rowsPerPageOptions]="[5, 10, 20]"
+		[(selection)]="selectedPokemon"
 	>
 		<ng-template pTemplate="header">
 			<tr>
@@ -25,7 +26,13 @@
 				<td>{{ pokemon.name }}</td>
 				<td>
 					<p-button
-						(click)="detallesPokemon(pokemon.id)"
+						(click)="
+							detallesPokemon(
+								pokemon.id,
+								pokemon.types,
+								pokemon.spriteUrl
+							)
+						"
 						icon="pi pi-plus"
 					/>
 					<p-dialog
@@ -34,14 +41,31 @@
 						[style]="{ width: '25rem' }"
 						header="Info Pokemon"
 					>
-						<p-tag
-							severity="success"
-							*ngFor="let type of pokemon.types"
-							[rounded]="true"
-							[value]="type"
+						<div
+							*ngIf="selectedPokemon"
+							class="flex flex-column align-items-center gap-3"
 						>
-						</p-tag>
+				
+							<img
+								[src]="selectedPokemon.spriteUrl"
+								[alt]="
+									'Sprite de Pokémon ' + selectedPokemon.id
+								"
+								style="width: 100px"
+							/>
+							<p>ID: {{ selectedPokemon.id }}</p>
+						
+							<div class="flex gap-2">
+								<p-tag
+									*ngFor="let type of selectedPokemon.types"
+									[value]="type"
+									severity="success"
+									[rounded]="true"
+								/>
+							</div>
+						</div>
 					</p-dialog>
+					
 				</td>
 			</tr>
 		</ng-template>
