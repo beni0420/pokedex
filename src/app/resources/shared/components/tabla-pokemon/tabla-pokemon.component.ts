@@ -1,11 +1,9 @@
 //1. Importaciones y dependencias
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { forkJoin } from 'rxjs';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { Pokemon } from '../../../../core/interfaces/pokemon.interface';
 import { PokemonService } from '../../../../core/services/pokemon.service';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
@@ -39,38 +37,28 @@ import { TagModule } from 'primeng/tag';
 	cargarPokemons(): void {
 	  this.pokemonService.getPokemonList().subscribe({
 		next: (response) => {
-		  const requests = response.results.map(pokemon => 
-			this.pokemonService.getPokemonDetails(pokemon.url)
-		  );
-  
-		  forkJoin(requests).subscribe({
-			next: (detalles: Pokemon[]) => {
-			  this.pokemonList = detalles.map(d => ({
-				id: d.id,
-				name: d.name
+			this.pokemonList = response.results.map(pokemon => ({
+				id: +pokemon.url.split('/').filter(Boolean).pop()!, // Extrae ID de la URL
+				name: pokemon.name
 			  }));
+			},
+			error: (err) => console.error('Error cargando lista', err)
+		  });
+		}
+  
+	verDetalles(pokemon: { id: number; name: string }): void {
+		this.pokemonService.getPokemonDetails(pokemon.id).subscribe({
+			next: (detalles) => {
+			  this.selectedPokemon = {
+				id: detalles.id,
+				name: detalles.name,
+				types: detalles.types.map(t => t.type.name),
+				spriteUrl: detalles.sprites.front_default,
+				abilities: detalles.abilities.map(a => a.ability.name)
+			  };
+			  this.dialogVisible = true;
 			},
 			error: (err) => console.error('Error cargando detalles', err)
 		  });
-		},
-		error: (err) => console.error('Error cargando lista', err)
-	  });
-	}
-  
-	verDetalles(pokemon: { id: number; name: string }): void {
-	  const url = `${this.pokemonService.baseUrl}/${pokemon.id}`;
-	  this.pokemonService.getPokemonDetails(url).subscribe({
-		next: (detalles) => {
-		  this.selectedPokemon = {
-			id: detalles.id,
-			name: detalles.name,
-			types: detalles.types.map(t => t.type.name),
-			spriteUrl: detalles.sprites.front_default,
-			abilities: detalles.abilities.map(a => a.ability.name)
-		  };
-		  this.dialogVisible = true;
-		},
-		error: (err) => console.error('Error cargando detalles', err)
-	  });
-	}
-  }
+		}
+	  }
