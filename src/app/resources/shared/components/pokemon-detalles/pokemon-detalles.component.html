@@ -1,1 +1,49 @@
-<p>pokemon-detalles works!</p>
+<div class="flex justify-content-center flex-wrap">
+	<div *ngIf="pokemon" class="flex gap-4">
+		<!-- Card izq -->
+		<p-card id="card1" class="flex-shrink-0" [style]="{ width: '20rem' }">
+			<div class="flex flex-column align-items-center gap-3">
+				<p><strong>ID:</strong> {{ pokemon.id }}</p>
+				<img
+					[src]="pokemon.sprites.front_default"
+					style="width: 200px"
+				/>
+				<p>
+					<strong>Nombre:</strong>
+					{{ pokemon.name | titlecase }}
+				</p>
+			</div>
+		</p-card>
+
+        <!-- Card der -->
+		<p-card id="card2" class="flex-grow-1" [style]="{ width: '25rem' }">
+			<div class="flex flex-column gap-4">
+				<!-- Tipos -->
+				<div>
+					<h4>Tipos</h4>
+					<div class="flex flex-wrap gap-2">
+						<p-tag
+							*ngFor="let type of pokemon.types"
+							[value]="type.type.name"
+							severity="success"
+							[rounded]="true"
+						/>
+					</div>
+				</div>
+
+				<!-- Habilidades -->
+				<div>
+					<h4>Habilidades</h4>
+					<div class="flex flex-wrap gap-2">
+						<p-tag
+							*ngFor="let ability of pokemon.abilities"
+							[value]="ability.ability.name"
+							severity="info"
+							[rounded]="true"
+						/>
+					</div>
+				</div>
+			</div>
+		</p-card>
+	</div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../../../../core/services/pokemon.service';
 import { Pokemon } from '../../../../core/interfaces/pokemon.interface';
@@ -10,7 +10,8 @@ import { TagModule } from 'primeng/tag';
   selector: 'app-pokemon-detalles',
   imports: [CommonModule, CardModule, TagModule],
   templateUrl: './pokemon-detalles.component.html',
-  styleUrl: './pokemon-detalles.component.scss'
+  styleUrl: './pokemon-detalles.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class PokemonDetailComponent implements OnInit {
   pokemon!: Pokemon;

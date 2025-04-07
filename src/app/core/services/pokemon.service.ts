@@ -9,14 +9,14 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  // Obtiene solo nombres y URLs
+  // Obtiene solo nombres y URLs para imprimir en la tabla
   getPokemonList(limit: number = 20): Observable<{ results: { name: string; url: string }[] }> {
     return this.http.get<{ results: { name: string; url: string }[] }>(
       `${this.baseUrl}?limit=${limit}`
     );
   }
 
-  // Obtiene detalles de un Pokémon específico
+  // Obtiene detalles de un Pokémon específico al pulsar
   getPokemonDetails(id: number): Observable<Pokemon> {
     return this.http.get<Pokemon>(`${this.baseUrl}/${id}`);
   }

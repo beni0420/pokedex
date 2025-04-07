@@ -7,11 +7,12 @@ import { DialogModule } from 'primeng/dialog';
 import { PokemonService } from '../../../../core/services/pokemon.service';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
+import { RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'app-tabla-pokemon',
 	standalone: true,
-	imports: [CommonModule, TableModule, ButtonModule, DialogModule, CardModule, TagModule],
+	imports: [CommonModule, TableModule, ButtonModule, DialogModule, CardModule, TagModule, RouterLink],
 	templateUrl: './tabla-pokemon.component.html',
 	styleUrls: ['./tabla-pokemon.component.scss'],
 	encapsulation: ViewEncapsulation.None
@@ -38,7 +39,7 @@ import { TagModule } from 'primeng/tag';
 	  this.pokemonService.getPokemonList().subscribe({
 		next: (response) => {
 			this.pokemonList = response.results.map(pokemon => ({
-				id: +pokemon.url.split('/').filter(Boolean).pop()!, // Extrae ID de la URL
+				id: +pokemon.url.split('/').filter(Boolean).pop()!,
 				name: pokemon.name
 			  }));
 			},
