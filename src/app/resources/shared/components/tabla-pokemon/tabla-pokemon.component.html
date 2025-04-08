@@ -1,33 +1,43 @@
-<p-card
-	class="flex justify-content-center flex-wrap"
-	[style]="{ width: '50rem', marginBottom: '2rem' }"
->
-	<p-table
-		[value]="pokemonList"
-		[paginator]="true"
-		[rows]="5"
-		[tableStyle]="{ 'min-width': '50rem' }"
-		[rowsPerPageOptions]="[5, 10, 20]"
-	>
-		<ng-template pTemplate="header">
-			<tr>
-				<th>ID</th>
-				<th>Nombre</th>
-				<th>Más detalles</th>
-			</tr>
-		</ng-template>
-		<ng-template pTemplate="body" let-pokemon>
-			<tr>
-				<td>{{ pokemon.id }}</td>
-				<td>{{ pokemon.name }}</td>
-				<td>
-					<p-button
-						icon="pi pi-eye"
-						styleClass="p-button-rounded p-button-info p-button-sm"
-						[routerLink]="['/pokemon', pokemon.id]"
-					/>
-				</td>
-			</tr>
-		</ng-template>
-	</p-table>
-</p-card>
+<div class="flex justify-content-center">
+	<p-card class="flex justify-content-center flex-wrap">
+		<p-table
+			[value]="pokemonList"
+			[paginator]="true"
+			[rows]="rows"
+			[totalRecords]="totalRecords"
+			[first]="first"
+			[tableStyle]="{ 'min-width': '50rem' }"
+			[rowsPerPageOptions]="[5, 10, 20]"
+			(onPageChange)="onPageChange($event)"
+			[showCurrentPageReport]="true"
+			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+		>
+			<ng-template pTemplate="header">
+				<tr>
+					<th class="text-center bg-red-300">ID</th>
+					<th class="text-center bg-red-300">Nombre</th>
+					<th class="text-center bg-red-300">Más detalles</th>
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="body" let-pokemon>
+				<tr>
+					<td class="text-center bg-red-100">{{ pokemon.id }}</td>
+					<td class="text-center">{{ pokemon.name }}</td>
+					<td class="text-center">
+						<p-button
+							icon="pi pi-eye"
+							styleClass="p-button-rounded"
+							[routerLink]="['/pokemon', pokemon.id]"
+						/>
+					</td>
+				</tr>
+			</ng-template>
+			<ng-template #paginatorleft>
+				<p-button type="button" icon="pi pi-plus" text />
+			</ng-template>
+			<ng-template #paginatorright>
+				<p-button type="button" icon="pi pi-cloud" text />
+			</ng-template>
+		</p-table>
+	</p-card>
+</div>

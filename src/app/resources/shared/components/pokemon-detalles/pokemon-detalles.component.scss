@@ -1,9 +1,13 @@
 body{
-    background-color: beige;
+    background: linear-gradient(to bottom, #ffffff, #cccccc);
 }
 #card1{
-    margin-top: 100px;
+    margin-top: 20px;
 }
 #card2{
-    margin-top: 140px;
+    margin-top: 60px;
 }
+#card {
+    --p-card-background: #ffa3a3;
+  }
+  

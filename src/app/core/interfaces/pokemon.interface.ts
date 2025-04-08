@@ -1,6 +1,9 @@
+
+
 export interface Pokemon {
 	id: number;
 	name: string;
+	url:string;
 	base_experience: number;
 	height: number;
 	is_default: boolean;
@@ -54,11 +57,11 @@ export interface GenerationVIII {
 }
 export interface GenerationVII {
 	icons: DreamWorld[];
-	"ultra-sun-ultra-moon": Home;
+	'ultra-sun-ultra-moon': Home;
 }
 export interface GenerationVI {
-	"omegaruby-alphasapphire": Home[];
-	"x-y": Home[];
+	'omegaruby-alphasapphire': Home[];
+	'x-y': Home[];
 }
 export interface GenerationV {
 	black_white: BlackAndWhite[];
@@ -72,14 +75,14 @@ export interface GenerationIV {
 	platinum: Showdown[];
 }
 export interface Versions {
-	"generation-i": GenerationI;
-	"generation-ii": GenerationII;
-	"generation-iii": GenerationIII;
-	"generation-iv": GenerationIV;
-	"generation-v": GenerationV;
-	"generation-vi": GenerationVI;
-	"generation-vii": GenerationVII;
-	"generation-viii": GenerationVIII;
+	'generation-i': GenerationI;
+	'generation-ii': GenerationII;
+	'generation-iii': GenerationIII;
+	'generation-iv': GenerationIV;
+	'generation-v': GenerationV;
+	'generation-vi': GenerationVI;
+	'generation-vii': GenerationVII;
+	'generation-viii': GenerationVIII;
 }
 export interface GenerationIII {
 	emerald: OfficialArtwork[];
@@ -112,7 +115,7 @@ export interface BasicInfoGenerationI {
 export interface Other {
 	dream_world: DreamWorld;
 	home: Home;
-	"official-artwork": OfficialArtwork;
+	'official-artwork': OfficialArtwork;
 	showdown: Showdown;
 }
 export interface DreamWorld {
@@ -169,5 +172,3 @@ export interface BasicInfo {
 	name: string;
 	url: string;
 }
-
-// export interface Language {}

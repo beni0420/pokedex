@@ -2,3 +2,7 @@
 body {
 	background-color: grey;
 }
+::ng-deep .custom-yellow.p-button.p-button-info {
+	background-color: #ffd700; /* Amarillo */
+	border-color: #ffd700;
+  }
