@@ -1,9 +1,13 @@
-
-
+export interface PokemonGeneral {
+	count: number;
+	next: string | null;
+	previous: string | null;
+	results: Pokemon[];
+}
 export interface Pokemon {
 	id: number;
 	name: string;
-	url:string;
+	url: string;
 	base_experience: number;
 	height: number;
 	is_default: boolean;
