@@ -6,6 +6,8 @@ import { CardModule } from 'primeng/card';
 import { LittlePokemon } from '../../../../core/interfaces/little.interface';
 import { forkJoin, map, switchMap } from 'rxjs';
 import { TagModule } from 'primeng/tag';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
 	selector: 'app-tabla-pokemon',
@@ -14,7 +16,9 @@ import { TagModule } from 'primeng/tag';
 		CommonModule,
 		TableModule,
 		CardModule,
-		TagModule
+		TagModule,
+		DialogModule,
+		ButtonModule
 	],
 	templateUrl: './tabla-pokemon.component.html',
 	styleUrls: ['./tabla-pokemon.component.scss'],
@@ -49,4 +53,10 @@ export class TablaPokemonComponent implements OnInit {
 			error:(err)=>console.error('Error al cargar Pokemon', err)
 		});
 	}
+
+	visible: boolean = false;
+
+    showDialog() {
+        this.visible = true;
+    }
 }

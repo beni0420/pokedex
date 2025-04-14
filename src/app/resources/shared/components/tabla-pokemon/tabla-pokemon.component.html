@@ -13,7 +13,7 @@
 			<tr>
 				<th>ID</th>
 				<th>Nombre</th>
-				<th>Tipos</th>
+				<th>Más detalles</th>
 			</tr>
 		</ng-template>
 		<ng-template pTemplate="body" let-pokemon>
@@ -21,9 +21,17 @@
 				<td>{{ pokemon.id }}</td>
 				<td>{{ pokemon.name }}</td>
 				<td>
-					@for (type of pokemon.types; track type) {
-					<p-tag [value]="type.type.name"></p-tag>
-					}
+					<p-button (click)="showDialog()" icon="pi pi-eye" [rounded]="true" />
+					<p-dialog
+						header="Info del pokemon"
+						[modal]="true"
+						[(visible)]="visible"
+						[style]="{ width: '25rem' }"
+					>
+						@for (type of pokemon.types; track type) {
+						<p-tag [value]="type.type.name"></p-tag>
+						}
+					</p-dialog>
 				</td>
 			</tr>
 		</ng-template>
