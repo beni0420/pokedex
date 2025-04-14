@@ -1,8 +1,14 @@
-
 body {
-	background-color: grey;
+	background-color: rgb(162, 162, 162);
 }
-::ng-deep .custom-yellow.p-button.p-button-info {
-	background-color: #ffd700; /* Amarillo */
-	border-color: #ffd700;
-  }
+.p-button.p-button-rounded .pi-eye {
+	color: black !important; /* Amarillo dorado */
+	filter: brightness(1.2); /* Opcional: ajusta el brillo */
+}
+.custom-yellow-button {
+	background-color: #ffe969 !important; /* Amarillo */
+	border-color: #ffe969 !important; /* Opcional: borde amarillo */
+}
+.custom-yellow-button:hover {
+	background-color: #ecd13a !important; /* Naranja */
+}
