@@ -26,12 +26,20 @@ import { LittlePokemon } from '../../../../core/interfaces/little.interface';
 	encapsulation: ViewEncapsulation.None,
 })
 export class TablaPokemonComponent implements OnInit {
-	public littlePokemon: LittlePokemon = { id: 0, name: "", types:[]};
+	public littlePokemon: LittlePokemon[] = [];
+
 	constructor(private pokemonService: PokemonService) {}
 
 	ngOnInit() {
-		this.pokemonService.getPokemons().subscribe(littlePokemon => (this.littlePokemon = littlePokemon));
-
+		this.pokemonService
+			.getPokemons()
+			.subscribe((pokemons) => (this.littlePokemon = pokemons));
 	}
 
+	// private cargarPokemons():void{
+	// 	this.pokemonService.getPokemons().subscribe({
+	// 		next:(pokemons)=>this.littlePokemon=pokemons,
+	// 		error:(err)=>console.error('Error al cargar Pokemon', err)
+	// 	});
+	// }
 }
