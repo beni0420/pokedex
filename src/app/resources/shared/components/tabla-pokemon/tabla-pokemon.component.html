@@ -1,6 +1,6 @@
 <p-card
 	class="flex justify-content-center flex-wrap"
-	[style]="{ width: '50rem', marginBottom: '2rem' }"
+	[style]="{ width: '55rem', marginBottom: '2rem' }"
 >
 	<p-table
 		[value]="littlePokemon"
@@ -12,25 +12,26 @@
 		[showCurrentPageReport]="true"
 		[tableStyle]="{ 'min-width': '50rem' }"
 		(onLazyLoad)="pageChange($event)"
-		currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+		currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Pokemons"
 		[rowsPerPageOptions]="[5, 10, 25, 50]"
 	>
 		<ng-template pTemplate="header">
 			<tr>
-				<th>ID</th>
-				<th>Nombre</th>
-				<th>Más detalles</th>
+				<th width="20%" class="text-center bg-red-300">ID</th>
+				<th width="20%" class="text-center bg-red-300">Name</th>
+				<th width="20%" class="text-center bg-red-300">More details</th>
 			</tr>
 		</ng-template>
 		<ng-template pTemplate="body" let-pokemon>
 			<tr>
-				<td>{{ extraerId(pokemon.url) }}</td>
-				<td>{{ pokemon.name }}</td>
-				<td>
+				<td width="20%" class="text-center">{{ extraerId(pokemon.url) }}</td>
+				<td width="20%" class="text-center">{{ pokemon.name }}</td>
+				<td width="20%" class="text-center">
 					<p-button
 						[routerLink]="['/pokemon', extraerId(pokemon.url)]"
 						icon="pi pi-eye"
 						[rounded]="true"
+						styleClass="yellow"
 					/>
 				</td>
 			</tr>

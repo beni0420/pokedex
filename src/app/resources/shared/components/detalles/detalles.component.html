@@ -1,5 +1,10 @@
 <div class="flex justify-content-center" style="margin-bottom: 2rem">
-	<p-button label="Volver" icon="pi pi-arrow-left" (click)="volver()"></p-button>
+	<p-button
+		label="Back"
+		icon="pi pi-arrow-left"
+		(click)="volver()"
+        styleClass="yellow"
+	></p-button>
 </div>
 <div *ngIf="pokemon" class="flex flex-row gap-3 justify-content-center">
 	<p-card
@@ -14,7 +19,7 @@
 			<p><strong>ID</strong></p>
 			{{ pokemon.id }}
 			<br /><img [src]="pokemon.sprites.front_default" />
-			<p><strong>Nombre</strong></p>
+			<p><strong>Name</strong></p>
 			{{ pokemon.name }}
 		</div>
 	</p-card>
@@ -25,13 +30,13 @@
 		}"
 	>
 		<div class="flex flex-column align-items-center gap-2">
-			<p><strong>Tipos</strong></p>
+			<p><strong>Types</strong></p>
 			<div class="flex gap-2 flex-wrap justify-content-center">
 				@for (type of pokemon.types; track type) {
 				<p-tag [value]="type.type.name"></p-tag>
 				}
 			</div>
-			<p><strong>Habilidades</strong></p>
+			<p><strong>Abilities</strong></p>
 			<div class="flex gap-2 flex-wrap justify-content-center">
 				@for(ability of pokemon.abilities; track ability){
 				<p-tag [value]="ability.ability.name"></p-tag>
