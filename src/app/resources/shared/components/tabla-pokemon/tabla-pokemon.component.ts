@@ -25,7 +25,7 @@ import { ButtonModule } from 'primeng/button';
 	encapsulation: ViewEncapsulation.None,
 })
 export class TablaPokemonComponent implements OnInit {
-	public littlePokemon: LittlePokemon[] = [];
+	public littlePokemon: { name: string; url: string }[] = [];
 	public pokemonSeleccionado:LittlePokemon | null=null;
 
 	constructor(private pokemonService: PokemonService) {}
@@ -35,23 +35,7 @@ export class TablaPokemonComponent implements OnInit {
 	}
 
 	private cargarPokemons():void{
-		this.pokemonService.getPokemons().pipe(
-			switchMap(pokemonsBasicos=>{
-				const requests=pokemonsBasicos.map(pokemon=>
-					this.pokemonService.getTipos(pokemon.url).pipe(
-						map(detalles=>({
-							id: pokemon.id,
-							name:pokemon.name,
-							types:detalles.types,
-							abilities:detalles.abilities,
-							sprites:detalles.sprites,
-							url:pokemon.url
-						}))
-					)
-				);
-				return forkJoin(requests);
-			})
-		).subscribe({
+		this.pokemonService.getPokemons().subscribe({
 			next:(pokemonsCompletos)=>this.littlePokemon=pokemonsCompletos,
 			error:(err)=>console.error('Error al cargar Pokemon', err)
 		});
@@ -59,8 +43,14 @@ export class TablaPokemonComponent implements OnInit {
 
 	visible: boolean = false;
 
-    showDialog(pokemon:LittlePokemon) {
-		this.pokemonSeleccionado=pokemon;
-        this.visible = true;
+	//mostrar detalles solo al pulsar
+    showDialog(pokemon:{ name: string; url: string }) {
+		this.pokemonService.getTipos(pokemon.url).subscribe({
+			next:(detalles)=>{
+				this.pokemonSeleccionado=detalles;
+				this.visible=true;
+			},
+			error:(err)=>console.log('error al cargar detalles', err)
+		});
     }
 }

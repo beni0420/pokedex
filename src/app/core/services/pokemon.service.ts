@@ -11,28 +11,13 @@ export class PokemonService {
 
 	constructor(private http: HttpClient) {}
 
-	getPokemons(): Observable<{ id: number; name: string; url: string }[]> {
+	getPokemons(): Observable<{name: string; url: string }[]> {
 		return this.http.get<Response>(this.baseUrl).pipe(
-			map((response) =>
-				response.results.map((pokemon) => ({
-					id: +pokemon.url.split('/').slice(-2)[0],
-					name: pokemon.name,
-					url: pokemon.url,
-				}))
-			)
+			map((response) => response.results)
 		);
 	}
 
 	getTipos(url: string): Observable<LittlePokemon> {
-		return this.http.get<LittlePokemon>(url).pipe(
-			map((detalles) => ({
-				id: detalles.id,
-				url: url,
-				name: detalles.name,
-				types: detalles.types,
-				sprites:detalles.sprites,
-				abilities:detalles.abilities
-			}))
-		);
+		return this.http.get<LittlePokemon>(url);
 	}
 }
