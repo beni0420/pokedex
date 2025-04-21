@@ -40,7 +40,7 @@ export class TablaPokemonComponent implements OnInit {
 				const requests=pokemonsBasicos.map(pokemon=>
 					this.pokemonService.getTipos(pokemon.url).pipe(
 						map(detalles=>({
-							id: this.extraerId(pokemon.url),
+							id: pokemon.id,
 							name:pokemon.name,
 							types:detalles.types,
 							abilities:detalles.abilities,
@@ -56,11 +56,6 @@ export class TablaPokemonComponent implements OnInit {
 			error:(err)=>console.error('Error al cargar Pokemon', err)
 		});
 	}
-
-	private extraerId(url: string): number {
-		const parts = url.split('/');
-		return Number(parts[parts.length - 2]);
-	  }
 
 	visible: boolean = false;
 
