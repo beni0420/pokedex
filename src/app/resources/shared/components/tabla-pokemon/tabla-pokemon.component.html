@@ -5,9 +5,15 @@
 	<p-table
 		[value]="littlePokemon"
 		[paginator]="true"
-		[rows]="5"
+		[lazy]="true"
+		[rows]="rows"
+		[first]="first"
+		[totalRecords]="paginacion.count"
+		[showCurrentPageReport]="true"
 		[tableStyle]="{ 'min-width': '50rem' }"
-		[rowsPerPageOptions]="[5, 10, 20]"
+		(onLazyLoad)="pageChange($event)"
+		currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+		[rowsPerPageOptions]="[5, 10, 25, 50]"
 	>
 		<ng-template pTemplate="header">
 			<tr>

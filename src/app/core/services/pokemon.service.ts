@@ -11,10 +11,9 @@ export class PokemonService {
 
 	constructor(private http: HttpClient) {}
 
-	getPokemons(): Observable<{name: string; url: string }[]> {
-		return this.http.get<Response>(this.baseUrl).pipe(
-			map((response) => response.results)
-		);
+	getPokemons(offset:number=0, limit:number=10): Observable<Response> {
+		const url=`${this.baseUrl}?offset=${offset}&limit=${limit}`;
+		return this.http.get<Response>(url);
 	}
 
 	getTipos(url: string): Observable<LittlePokemon> {
