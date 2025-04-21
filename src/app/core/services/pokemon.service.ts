@@ -29,7 +29,9 @@ export class PokemonService {
 				id: detalles.id,
 				url: url,
 				name: detalles.name,
-				types: detalles.types
+				types: detalles.types,
+				sprites:detalles.sprites,
+				abilities:detalles.abilities
 			}))
 		);
 	}

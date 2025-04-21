@@ -21,16 +21,41 @@
 				<td>{{ pokemon.id }}</td>
 				<td>{{ pokemon.name }}</td>
 				<td>
-					<p-button (click)="showDialog()" icon="pi pi-eye" [rounded]="true" />
+					<p-button
+						(click)="showDialog(pokemon)"
+						icon="pi pi-eye"
+						[rounded]="true"
+					/>
 					<p-dialog
 						header="Info del pokemon"
 						[modal]="true"
 						[(visible)]="visible"
 						[style]="{ width: '25rem' }"
+						*ngIf="pokemonSeleccionado"
 					>
-						@for (type of pokemon.types; track type) {
-						<p-tag [value]="type.type.name"></p-tag>
-						}
+						<p-card
+							class="flex justify-content-start flex-wrap"
+							[style]="{ width: '50rem', marginBottom: '2rem' }"
+						>
+							<p><strong>ID</strong></p>
+							{{ pokemonSeleccionado.id }}
+							<br /><img [src]="pokemonSeleccionado.sprites.front_default" />
+							<p><strong>Nombre</strong></p>
+							{{ pokemonSeleccionado.name }}
+						</p-card>
+						<p-card
+							class="flex justify-content-center flex-wrap"
+							[style]="{ width: '50rem', marginBottom: '2rem' }"
+						>
+							<p><strong>Tipos</strong></p>
+							@for (type of pokemonSeleccionado.types; track type) {
+							<p-tag [value]="type.type.name"></p-tag>
+							}
+							<p><strong>Habilidades</strong></p>
+							@for(ability of pokemonSeleccionado.abilities; track ability){
+							<p-tag [value]="ability.ability.name"></p-tag>
+							}
+						</p-card>
 					</p-dialog>
 				</td>
 			</tr>

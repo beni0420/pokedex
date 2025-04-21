@@ -26,6 +26,7 @@ import { ButtonModule } from 'primeng/button';
 })
 export class TablaPokemonComponent implements OnInit {
 	public littlePokemon: LittlePokemon[] = [];
+	public pokemonSeleccionado:LittlePokemon | null=null;
 
 	constructor(private pokemonService: PokemonService) {}
 
@@ -39,9 +40,11 @@ export class TablaPokemonComponent implements OnInit {
 				const requests=pokemonsBasicos.map(pokemon=>
 					this.pokemonService.getTipos(pokemon.url).pipe(
 						map(detalles=>({
-							id:pokemon.id,
+							id: this.extraerId(pokemon.url),
 							name:pokemon.name,
 							types:detalles.types,
+							abilities:detalles.abilities,
+							sprites:detalles.sprites,
 							url:pokemon.url
 						}))
 					)
@@ -54,9 +57,15 @@ export class TablaPokemonComponent implements OnInit {
 		});
 	}
 
+	private extraerId(url: string): number {
+		const parts = url.split('/');
+		return Number(parts[parts.length - 2]);
+	  }
+
 	visible: boolean = false;
 
-    showDialog() {
+    showDialog(pokemon:LittlePokemon) {
+		this.pokemonSeleccionado=pokemon;
         this.visible = true;
     }
 }
