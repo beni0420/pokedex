@@ -4,7 +4,6 @@ import { TableModule } from 'primeng/table';
 import { PokemonService } from '../../../../core/services/pokemon.service';
 import { CardModule } from 'primeng/card';
 import { LittlePokemon } from '../../../../core/interfaces/little.interface';
-import { forkJoin, map, switchMap } from 'rxjs';
 import { TagModule } from 'primeng/tag';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -40,6 +39,11 @@ export class TablaPokemonComponent implements OnInit {
 			error:(err)=>console.error('Error al cargar Pokemon', err)
 		});
 	}
+
+	extraerId(url: string): number {
+		const parts = url.split('/');
+		return Number(parts[parts.length - 2]);
+	  }
 
 	visible: boolean = false;
 
