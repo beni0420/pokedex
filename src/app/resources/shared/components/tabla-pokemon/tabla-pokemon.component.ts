@@ -7,6 +7,7 @@ import { LittlePokemon } from '../../../../core/interfaces/little.interface';
 import { TagModule } from 'primeng/tag';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'app-tabla-pokemon',
@@ -17,7 +18,8 @@ import { ButtonModule } from 'primeng/button';
 		CardModule,
 		TagModule,
 		DialogModule,
-		ButtonModule
+		ButtonModule,
+		RouterLink
 	],
 	templateUrl: './tabla-pokemon.component.html',
 	styleUrls: ['./tabla-pokemon.component.scss'],
@@ -45,16 +47,6 @@ export class TablaPokemonComponent implements OnInit {
 		return Number(parts[parts.length - 2]);
 	  }
 
-	visible: boolean = false;
 
-	//mostrar detalles solo al pulsar
-    showDialog(pokemon:{ name: string; url: string }) {
-		this.pokemonService.getTipos(pokemon.url).subscribe({
-			next:(detalles)=>{
-				this.pokemonSeleccionado=detalles;
-				this.visible=true;
-			},
-			error:(err)=>console.log('error al cargar detalles', err)
-		});
-    }
+
 }

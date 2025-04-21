@@ -22,67 +22,10 @@
 				<td>{{ pokemon.name }}</td>
 				<td>
 					<p-button
-						(click)="showDialog(pokemon)"
+						[routerLink]="['/pokemon', extraerId(pokemon.url)]"
 						icon="pi pi-eye"
 						[rounded]="true"
 					/>
-					<p-dialog
-						header="Info del pokemon"
-						[modal]="true"
-						[(visible)]="visible"
-						[style]="{ width: '45rem' }"
-						*ngIf="pokemonSeleccionado"
-					>
-						<div class="flex flex-row gap-3">
-							<p-card
-								class="flex justify-content-start flex-wrap"
-								[style]="{
-									width: '20rem',
-									marginBottom: '2rem'
-								}"
-							>
-							<div class="flex flex-column align-items-center justify-content-center gap-2">
-								<p><strong>ID</strong></p>
-								{{ pokemonSeleccionado.id }}
-								<br /><img
-									[src]="
-										pokemonSeleccionado.sprites
-											.front_default
-									"
-								/>
-								<p><strong>Nombre</strong></p>
-								{{ pokemonSeleccionado.name }}
-							</div>
-							</p-card>
-							<p-card
-								class="flex justify-content-center flex-wrap"
-								[style]="{
-									width: '20rem',
-									marginBottom: '2rem'
-								}"
-							>
-							<div class="flex flex-column align-items-center gap-2">
-								<p><strong>Tipos</strong></p>
-								<div class="flex gap-2 flex-wrap">
-									@for (type of pokemonSeleccionado.types;
-									track type) {
-									<p-tag [value]="type.type.name"></p-tag>
-									}
-								</div>
-								<p><strong>Habilidades</strong></p>
-								<div class="flex gap-2 flex-wrap">
-									@for(ability of
-									pokemonSeleccionado.abilities; track
-									ability){
-									<p-tag
-										[value]="ability.ability.name"
-									></p-tag>
-									}
-								</div>
-							</div>
-							</p-card>
-						</div>
-					</p-dialog>
 				</td>
 			</tr>
 		</ng-template>
