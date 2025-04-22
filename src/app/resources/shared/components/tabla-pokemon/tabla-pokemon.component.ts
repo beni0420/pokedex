@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { Paginacion } from '../../../../core/interfaces/paginacion.interface';
+import { PaginatorModule } from 'primeng/paginator';
 
 @Component({
 	selector: 'app-tabla-pokemon',
@@ -20,6 +21,7 @@ import { Paginacion } from '../../../../core/interfaces/paginacion.interface';
 		DialogModule,
 		ButtonModule,
 		RouterLink,
+		PaginatorModule
 	],
 	templateUrl: './tabla-pokemon.component.html',
 	styleUrls: ['./tabla-pokemon.component.scss'],
@@ -48,7 +50,7 @@ export class TablaPokemonComponent implements OnInit {
 			});
 	}
 
-	pageChange(event: any) {
+	onPageChange(event: any) {
 		this.first = event.first;
 		this.rows = event.rows;
 		this.paginacion.offset = event.first;

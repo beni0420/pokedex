@@ -6,7 +6,7 @@ import { Response } from '../interfaces/response.interface';
 
 @Injectable({ providedIn: 'root' })
 export class PokemonService {
-	//private littlePokemon: LittlePokemon = { id: 0, name: '', types: [] };
+	
 	private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
 	constructor(private http: HttpClient) {}
