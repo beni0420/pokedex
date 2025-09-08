@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { TablaPokemonComponent } from '../../shared/components/tabla-pokemon/tabla-pokemon.component';
+import 'primeflex/primeflex.scss';
+import { TablaPokemonComponent } from "../../shared/components/tabla-pokemon/tabla-pokemon.component";
 
 @Component({
   selector: 'app-main',
